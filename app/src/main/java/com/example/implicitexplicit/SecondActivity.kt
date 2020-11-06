@@ -33,7 +33,7 @@ class SecondActivity : AppCompatActivity() {
         }
     }
     private fun b2(){
-        val webIntent: Intent = Uri.parse("https://www.android.com").let { webpage ->
+        val webIntent: Intent = Uri.parse("https://www.google.com").let { webpage ->
             Intent(Intent.ACTION_VIEW, webpage)
         }
         startActivity(webIntent)
