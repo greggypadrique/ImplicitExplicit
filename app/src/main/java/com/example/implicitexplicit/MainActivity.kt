@@ -1,5 +1,6 @@
 package com.example.implicitexplicit
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -11,16 +12,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        loginBtn.setOnClickListener{
+        loginBtn.setOnClickListener {
             val username = usernameInput.text.toString()
             val password = passwordInput.text.toString()
 
-            if(TextUtils.isEmpty(username)) {
+            if (TextUtils.isEmpty(username)) {
                 usernameInput.setError("Please enter username")
-            }else if(TextUtils.isEmpty(password)){
+            } else if (TextUtils.isEmpty(password)) {
                 passwordInput.setError("Please enter password")
-            }else{
-                
+            } else if (username != "admin") {
+                usernameInput.setError("Invalid Username")
+            } else if (password != "admin") {
+                passwordInput.setError("Invalid Password")
+            } else if (username != "admin" && password != "admin") {
+                usernameInput.setError("Invalid Username")
+                passwordInput.setError("Invalid Password")
+            } else if (username == "admin" && password == "admin"){
+                val intent = Intent(this, SecondActivity::class.java)
+                intent.putExtra("user", username)
+                intent.putExtra("password", password)
+
+                startActivity(intent)
+                finish()
+            } else {
+                "Invalid Credentials"
             }
         }
     }
